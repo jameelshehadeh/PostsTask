@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private func setupRootWindow(for windowScene: UIWindowScene) {
         window = UIWindow(windowScene: windowScene)
         window?.frame = windowScene.coordinateSpace.bounds
-        window?.rootViewController = ViewController(nibName: nil, bundle: nil)
+        window?.rootViewController = MainTabBarVC(nibName: nil, bundle: nil)
         window?.makeKeyAndVisible()
     }
     
