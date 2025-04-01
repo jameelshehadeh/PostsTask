@@ -11,5 +11,6 @@ protocol Networkable {
     
     // Simulating networking calls 
     func request<T: Decodable>(_ fileName: String, completion: @escaping (Result<T, Error>) -> Void)
+    func decode<T: Decodable>(_ data: Data) throws -> T
     
 }

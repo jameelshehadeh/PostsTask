@@ -19,13 +19,17 @@ class NetworkService: Networkable {
             }
             do {
                 let data = try Data(contentsOf: url)
-                let model = try JSONDecoder().decode(T.self, from: data)
+                let model: T = try self.decode(data)
                 completion(.success(model))
             } catch {
                 completion(.failure(error))
             }
         }
         
+    }
+    
+    func decode<T>(_ data: Data) throws -> T where T : Decodable {
+        try JSONDecoder().decode(T.self, from: data)
     }
     
 }
