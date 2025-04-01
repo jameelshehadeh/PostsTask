@@ -8,8 +8,6 @@
 import Foundation
 import UIKit
 
-// we want to router to have a reference to the view
-
 typealias EntryPoint = PostsListViewProtocol & UIViewController
 
 protocol PostsRouting {
