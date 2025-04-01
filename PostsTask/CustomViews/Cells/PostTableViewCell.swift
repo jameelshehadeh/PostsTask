@@ -59,6 +59,7 @@ class PostTableViewCell: UITableViewCell {
     private lazy var postTextLabel : UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.numberOfLines = 0
         return label
     }()
     
