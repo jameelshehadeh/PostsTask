@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct Post: Identifiable {
+struct Post: Identifiable, Codable {
     
     var id: String = UUID().uuidString
     var owner: User?
     var text: String?
     var postImageURL: String?
-    var createdAt: Date?
+    var createdAt: String?
     
 }

@@ -22,8 +22,9 @@ class PostsRouter: PostsRouting {
     
     static func start() -> PostsRouting {
         let router = PostsRouter()
+        let repository: PostsRepositoryProtocol = PostsRepository()
         var view: PostsListViewProtocol = PostsListVC(nibName: nil, bundle: nil)
-        var interactor: PostsListInteractorProtocol = PostsListInteractor()
+        var interactor: PostsListInteractorProtocol = PostsListInteractor(repository: repository)
         var presenter: PostsListPresenterProtocol = PostsListPresenter()
         view.presenter = presenter
         presenter.view = view

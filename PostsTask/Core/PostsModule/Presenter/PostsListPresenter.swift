@@ -26,8 +26,11 @@ class PostsListPresenter: PostsListPresenterProtocol {
     func interactorDidFetchPosts(with result: Result<[Post],Error>) {
         switch result {
         case .success(let posts):
-            self.posts = posts
-            view?.reloadData()
+            DispatchQueue.main.async { [weak self] in
+                guard let self else {return}
+                self.posts = posts
+                view?.reloadData()
+            }
         case .failure(let failure):
             view?.update(with: failure)
         }
