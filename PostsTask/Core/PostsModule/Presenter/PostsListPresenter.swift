@@ -22,18 +22,14 @@ class PostsListPresenter: PostsListPresenterProtocol {
     private var posts: [Post]?
     
     func viewDidLoad(){
-        loadingState = .loading
-        view?.updateLoadingState()
+        updateLoadingState(with: .loading)
         interactor?.getPosts()
     }
     
     func interactorDidFetchPosts(with result: Result<[Post],Error>) {
         
         defer {
-            DispatchQueue.main.async { [weak self] in
-                self?.loadingState = .idle
-                self?.view?.updateLoadingState()
-            }
+            updateLoadingState(with: .idle)
         }
         
         switch result {
@@ -52,5 +48,13 @@ class PostsListPresenter: PostsListPresenterProtocol {
         posts?[index]
     }
     
+    
+    func updateLoadingState(with loadingState: LoadingState) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else {return}
+            self.loadingState = loadingState
+            self.view?.updateLoadingState()
+        }
+    }
     
 }

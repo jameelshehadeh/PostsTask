@@ -17,5 +17,6 @@ protocol PostsListPresenterProtocol {
     var getItemCount: Int { get }
     var getSectionCount: Int { get }
     var loadingState: LoadingState { get }
+    func updateLoadingState(with loadingState: LoadingState)
     
 }
