@@ -20,6 +20,12 @@ class PostsListVC: UIViewController {
         return tv
     }()
 
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView(style: .large)
+        activityIndicator.hidesWhenStopped = true
+        return activityIndicator
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubviews()
@@ -33,11 +39,17 @@ class PostsListVC: UIViewController {
     
     private func addSubviews() {
         view.addSubview(tableView)
+        view.addSubview(activityIndicator)
     }
     
     private func addConstraints() {
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+        
+        activityIndicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.size.equalTo(CGSize(width: 40, height: 40))
         }
     }
 
@@ -67,6 +79,18 @@ extension PostsListVC: PostsListViewProtocol {
     
     func update(with error: any Error) {
         
+    }
+    
+    func updateLoadingState() {
+        guard let loadingState = presenter?.loadingState else { return }
+        switch loadingState {
+        case .loading:
+            tableView.isHidden = true
+            activityIndicator.startAnimating()
+        case .idle:
+            tableView.isHidden = false
+            activityIndicator.stopAnimating()
+        }
     }
     
 }

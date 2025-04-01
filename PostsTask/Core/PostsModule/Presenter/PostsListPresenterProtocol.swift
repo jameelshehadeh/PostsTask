@@ -16,5 +16,6 @@ protocol PostsListPresenterProtocol {
     func getDataByIndex(_ index: Int) -> Post?
     var getItemCount: Int { get }
     var getSectionCount: Int { get }
+    var loadingState: LoadingState { get }
     
 }

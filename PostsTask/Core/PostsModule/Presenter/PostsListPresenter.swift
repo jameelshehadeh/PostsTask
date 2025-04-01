@@ -8,6 +8,8 @@
 import Foundation
 
 class PostsListPresenter: PostsListPresenterProtocol {
+    
+    var loadingState: LoadingState = .loading
  
     var getSectionCount: Int = 1
     
@@ -20,10 +22,20 @@ class PostsListPresenter: PostsListPresenterProtocol {
     private var posts: [Post]?
     
     func viewDidLoad(){
+        loadingState = .loading
+        view?.updateLoadingState()
         interactor?.getPosts()
     }
     
     func interactorDidFetchPosts(with result: Result<[Post],Error>) {
+        
+        defer {
+            DispatchQueue.main.async { [weak self] in
+                self?.loadingState = .idle
+                self?.view?.updateLoadingState()
+            }
+        }
+        
         switch result {
         case .success(let posts):
             DispatchQueue.main.async { [weak self] in

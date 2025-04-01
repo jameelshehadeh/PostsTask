@@ -11,6 +11,7 @@ protocol PostsListViewProtocol {
     
     var presenter: PostsListPresenterProtocol? { set get}
     func reloadData()
+    func updateLoadingState()
     func update(with error: Error)
     
 }
