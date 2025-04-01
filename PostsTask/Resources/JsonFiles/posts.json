@@ -4,7 +4,7 @@
     "owner": {
       "id": "550e8400-e29b-41d4-a716-446655440000",
       "name": "Alice Johnson",
-      "username": "@alice",
+      "username": "alice",
       "profileImageURL": "user3"
     },
     "text": "Enjoying a beautiful sunset today!",
@@ -16,7 +16,7 @@
     "owner": {
       "id": "6f9619ff-8b86-d011-b42d-00cf4fc964ff",
       "name": "Bob Smith",
-      "username": "@bob",
+      "username": "bob",
       "profileImageURL": "user2"
     },
     "text": "Had a great workout session this is a long text to test how a post will react in case of long test, let's keep writing to see what's gonna happen",
@@ -28,7 +28,7 @@
     "owner": {
       "id": "7d6f8bfe-cf9e-4e28-bcc9-3eaf0b7b8b25",
       "name": "John Doe",
-      "username": "@johndoe",
+      "username": "johndoe",
       "profileImageURL": "user1"
     },
     "text": "Exploring new tech trends!",
