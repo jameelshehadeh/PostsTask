@@ -12,5 +12,9 @@ protocol PostsListPresenterProtocol {
     var view: PostsListViewProtocol? { get set}
     var interactor: PostsListInteractorProtocol? { get set }
     func interactorDidFetchPosts(with result: Result<[Post],Error>)
+    func viewDidLoad()
+    func getDataByIndex(_ index: Int) -> Post?
+    var getItemCount: Int { get }
+    var getSectionCount: Int { get }
     
 }

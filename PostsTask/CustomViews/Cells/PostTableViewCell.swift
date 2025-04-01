@@ -29,7 +29,6 @@ class PostTableViewCell: UITableViewCell {
     
     private lazy var postOwnerImageView : UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "user3")
         imageView.layer.borderColor = UIColor.lightGray.cgColor
         imageView.layer.borderWidth = 0.5
         imageView.contentMode = .scaleAspectFill
@@ -40,14 +39,12 @@ class PostTableViewCell: UITableViewCell {
     
     private lazy var ownerNameLabel : UILabel = {
         let label = UILabel()
-        label.text = "name"
         label.font = .systemFont(ofSize: 14, weight: .semibold)
         return label
     }()
     
     private lazy var ownerUsernameLabel : UILabel = {
         let label = UILabel()
-        label.text = "@username"
         label.textColor = .gray
         label.font = .systemFont(ofSize: 14, weight: .semibold)
         return label
@@ -55,16 +52,13 @@ class PostTableViewCell: UITableViewCell {
     
     private lazy var postImageView : UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "gear")
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
     private lazy var postTextLabel : UILabel = {
         let label = UILabel()
-        label.text = "Lorem ipsum text"
-        label.textColor = .gray
-        label.font = .systemFont(ofSize: 14, weight: .semibold)
+        label.font = .systemFont(ofSize: 14, weight: .regular)
         return label
     }()
     
@@ -102,6 +96,14 @@ class PostTableViewCell: UITableViewCell {
             make.size.equalTo(40)
         }
     }
+    
+    func configureUI(with post: Post) {
+        ownerNameLabel.text = post.owner?.name ?? ""
+        postOwnerImageView.image = UIImage(named: post.owner?.profileImageURL ?? "")
+        postTextLabel.text = post.text
+        ownerUsernameLabel.text = "@\(post.owner?.username ?? "")"
+    }
+    
 }
 
 struct PostTableViewCellPreview: UIViewRepresentable {

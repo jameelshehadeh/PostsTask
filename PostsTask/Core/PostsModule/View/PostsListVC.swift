@@ -23,6 +23,7 @@ class PostsListVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubviews()
+        presenter?.viewDidLoad()
     }
     
     override func viewDidLayoutSubviews() {
@@ -45,13 +46,14 @@ class PostsListVC: UIViewController {
 extension PostsListVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return presenter?.getItemCount ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.id, for: indexPath) as? PostTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.id, for: indexPath) as? PostTableViewCell , let model = presenter?.getDataByIndex(indexPath.row) else {
             return UITableViewCell()
         }
+        cell.configureUI(with: model)
         return cell
     }
         
@@ -59,8 +61,8 @@ extension PostsListVC: UITableViewDelegate, UITableViewDataSource {
 
 extension PostsListVC: PostsListViewProtocol {
     
-    func update(with posts: [Post]) {
-
+    func reloadData() {
+        self.tableView.reloadData()
     }
     
     func update(with error: any Error) {

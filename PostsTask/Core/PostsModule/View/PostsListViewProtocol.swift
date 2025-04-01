@@ -10,6 +10,7 @@ import Foundation
 protocol PostsListViewProtocol {
     
     var presenter: PostsListPresenterProtocol? { set get}
-    func update(with posts: [Post])
+    func reloadData()
     func update(with error: Error)
+    
 }

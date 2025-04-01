@@ -10,8 +10,7 @@ import Foundation
 struct Post: Identifiable {
     
     var id: String = UUID().uuidString
-    var userName: String?
-    var userProfileURL: String?
+    var owner: User?
     var text: String?
     var postImageURL: String?
     var createdAt: Date?
