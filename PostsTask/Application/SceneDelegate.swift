@@ -18,9 +18,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     private func setupRootWindow(for windowScene: UIWindowScene) {
+        let postsRouter = PostsRouter.start()
         window = UIWindow(windowScene: windowScene)
         window?.frame = windowScene.coordinateSpace.bounds
-        window?.rootViewController = MainTabBarVC(nibName: nil, bundle: nil)
+        window?.rootViewController = postsRouter.view
         window?.makeKeyAndVisible()
     }
     
