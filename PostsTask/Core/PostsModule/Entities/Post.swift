@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct Post {
+struct Post: Identifiable {
     
+    var id: String = UUID().uuidString
     var userName: String?
     var userProfileURL: String?
     var text: String?
