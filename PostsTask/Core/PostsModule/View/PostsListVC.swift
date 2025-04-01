@@ -26,11 +26,22 @@ class PostsListVC: UIViewController {
         return activityIndicator
     }()
     
+    private lazy var barButtonItem: UIBarButtonItem = {
+        let barButtonItem: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(pushCreatePost))
+        barButtonItem.tintColor = .label
+        return barButtonItem
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Posts"
         addSubviews()
         presenter?.viewDidLoad()
+        navigationItem.rightBarButtonItem = barButtonItem
+    }
+    
+    @objc func pushCreatePost() {
+        presenter?.pushCreatePost()
     }
     
     override func viewDidLayoutSubviews() {

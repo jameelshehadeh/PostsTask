@@ -17,6 +17,8 @@ protocol PostsListPresenterProtocol {
     var getItemCount: Int { get }
     var getSectionCount: Int { get }
     var loadingState: LoadingState { get }
+    var router: PostsRouting? { get set }
+    func pushCreatePost()
     func updateLoadingState(with loadingState: LoadingState)
     
 }

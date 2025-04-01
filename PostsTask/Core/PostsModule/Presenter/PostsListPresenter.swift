@@ -9,6 +9,8 @@ import Foundation
 
 class PostsListPresenter: PostsListPresenterProtocol {
     
+    var router: (any PostsRouting)?
+    
     var loadingState: LoadingState = .loading
  
     var getSectionCount: Int = 1
@@ -57,4 +59,7 @@ class PostsListPresenter: PostsListPresenterProtocol {
         }
     }
     
+    func pushCreatePost() {
+        router?.pushCreatePost()
+    }
 }

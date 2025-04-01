@@ -14,6 +14,7 @@ protocol PostsRouting {
     var view: EntryPoint? { get set }
     static func start() -> PostsRouting
     func createNavigationController() -> UINavigationController
+    func pushCreatePost()
 }
 
 class PostsRouter: PostsRouting {
@@ -30,6 +31,7 @@ class PostsRouter: PostsRouting {
         presenter.view = view
         presenter.interactor = interactor
         interactor.presenter = presenter
+        presenter.router = router
         router.view = view as? EntryPoint
         return router
     }
@@ -39,6 +41,12 @@ class PostsRouter: PostsRouting {
             fatalError("EntryPoint view is nil. Ensure the router is properly initialized.")
         }
         return UINavigationController(rootViewController: view)
+    }
+    
+    func pushCreatePost(){
+        let vc = UIViewController(nibName: nil, bundle: nil)
+        vc.view.backgroundColor = .red
+        view?.navigationController?.pushViewController(vc, animated: true)
     }
     
 }
