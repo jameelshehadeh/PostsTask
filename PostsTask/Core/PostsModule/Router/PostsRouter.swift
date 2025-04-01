@@ -11,10 +11,9 @@ import UIKit
 typealias EntryPoint = PostsListViewProtocol & UIViewController
 
 protocol PostsRouting {
-    
     var view: EntryPoint? { get set }
     static func start() -> PostsRouting
-    
+    func createNavigationController() -> UINavigationController
 }
 
 class PostsRouter: PostsRouting {
@@ -32,6 +31,13 @@ class PostsRouter: PostsRouting {
         interactor.presenter = presenter
         router.view = view as? EntryPoint
         return router
+    }
+    
+    func createNavigationController() -> UINavigationController {
+        guard let view = view else {
+            fatalError("EntryPoint view is nil. Ensure the router is properly initialized.")
+        }
+        return UINavigationController(rootViewController: view)
     }
     
 }

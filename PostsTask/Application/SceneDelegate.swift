@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let postsRouter = PostsRouter.start()
         window = UIWindow(windowScene: windowScene)
         window?.frame = windowScene.coordinateSpace.bounds
-        window?.rootViewController = postsRouter.view
+        window?.rootViewController = postsRouter.createNavigationController()
         window?.makeKeyAndVisible()
     }
     
