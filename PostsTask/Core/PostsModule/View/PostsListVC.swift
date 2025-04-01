@@ -28,6 +28,7 @@ class PostsListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Posts"
         addSubviews()
         presenter?.viewDidLoad()
     }
