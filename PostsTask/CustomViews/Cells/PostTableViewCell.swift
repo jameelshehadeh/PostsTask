@@ -27,11 +27,14 @@ class PostTableViewCell: UITableViewCell {
         return stackView
     }()
     
-    
     private lazy var postOwnerImageView : UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "person")
-        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(named: "user3")
+        imageView.layer.borderColor = UIColor.lightGray.cgColor
+        imageView.layer.borderWidth = 0.5
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 20
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -93,7 +96,7 @@ class PostTableViewCell: UITableViewCell {
 
     func addConstraints() {
         vStackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.edges.equalToSuperview().inset(10)
         }
         postOwnerImageView.snp.makeConstraints { make in
             make.size.equalTo(40)
