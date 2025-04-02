@@ -8,6 +8,10 @@
 import UIKit
 import SnapKit
 
+protocol ProfileImageViewDelegate: AnyObject {
+    func profileImageViewDidTap()
+}
+
 class ProfileImageView: UIView {
 
     private lazy var profileImageView: UIImageView = {
@@ -17,6 +21,8 @@ class ProfileImageView: UIView {
         imageView.clipsToBounds = true
         return imageView
     }()
+    
+    weak var delegate: ProfileImageViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,7 +57,7 @@ class ProfileImageView: UIView {
     }
     
     @objc private func profileTapped() {
-        
+        delegate?.profileImageViewDidTap()
     }
     
 }
