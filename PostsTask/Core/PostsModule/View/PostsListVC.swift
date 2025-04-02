@@ -56,7 +56,9 @@ class PostsListVC: UIViewController {
     }
     
     private func setupProfileImageView() {
-        let profileButtonItem = UIBarButtonItem(customView: ProfileImageView())
+        let profileImageView = ProfileImageView()
+        profileImageView.delegate = self
+        let profileButtonItem = UIBarButtonItem(customView: profileImageView)
         navigationItem.leftBarButtonItem = profileButtonItem
     }
        
@@ -109,6 +111,14 @@ extension PostsListVC: PostsListViewProtocol {
             tableView.isHidden = false
             activityIndicator.stopAnimating()
         }
+    }
+    
+}
+
+extension PostsListVC: ProfileImageViewDelegate {
+    
+    func profileImageViewDidTap() {
+        
     }
     
 }
