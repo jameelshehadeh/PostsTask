@@ -52,8 +52,14 @@ class PostsListVC: UIViewController {
     private func addSubviews() {
         view.addSubview(tableView)
         view.addSubview(activityIndicator)
+        setupProfileImageView()
     }
     
+    private func setupProfileImageView() {
+        let profileButtonItem = UIBarButtonItem(customView: ProfileImageView())
+        navigationItem.leftBarButtonItem = profileButtonItem
+    }
+       
     private func addConstraints() {
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
