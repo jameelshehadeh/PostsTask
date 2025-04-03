@@ -22,10 +22,12 @@ class PostsListPresenter: PostsListPresenterProtocol {
     var view: PostsListViewProtocol?
     var interactor: PostsListInteractorProtocol?
     private var posts: [Post]?
+    private var users: [User]?
     
     func viewDidLoad(){
         updateLoadingState(with: .loading)
         interactor?.getPosts()
+        interactor?.getUsers()
     }
     
     func interactorDidFetchPosts(with result: Result<[Post],Error>) {
@@ -44,6 +46,22 @@ class PostsListPresenter: PostsListPresenterProtocol {
         case .failure(let failure):
             view?.update(with: failure)
         }
+    }
+    
+    func interactorDidFetchUsers(with result: Result<[User], any Error>) {
+        
+        switch result {
+        case .success(let users):
+            DispatchQueue.main.async { [weak self] in
+                guard let self else {return}
+                self.view?.didFetchUsers(users)
+            }
+        case .failure(let failure):
+            break
+        }
+        
+        
+        
     }
     
     func getDataByIndex(_ index: Int) -> Post? {

@@ -8,6 +8,8 @@
 import Foundation
 
 class PostsRepository: PostsRepositoryProtocol {
+   
+    
     
     private let networkService: Networkable
     
@@ -26,6 +28,17 @@ class PostsRepository: PostsRepositoryProtocol {
             }
         }
         
+    }
+    
+    func fetchUsers(completion: @escaping (Result<[User], any Error>) -> ()) {
+        networkService.request("users") { (result: Result<[User], Error>) in
+            switch result {
+            case .success(let users):
+                completion(.success(users))
+            case .failure(let failure):
+                completion(.failure(failure))
+            }
+        }
     }
     
 }

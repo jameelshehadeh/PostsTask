@@ -13,5 +13,6 @@ protocol PostsListViewProtocol {
     func reloadData()
     func updateLoadingState()
     func update(with error: Error)
+    func didFetchUsers(_ users: [User])
     
 }

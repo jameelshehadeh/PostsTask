@@ -9,20 +9,23 @@ import UIKit
 import SnapKit
 
 protocol ProfileImageViewDelegate: AnyObject {
-    func profileImageViewDidTap()
+    func didTapSwitchUser(_ switchedUser: User)
 }
 
 class ProfileImageView: UIView {
 
-    private lazy var profileImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "user1"))
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 15
-        imageView.clipsToBounds = true
-        return imageView
+    private lazy var button: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = 15
+        button.isHidden = true
+        button.showsMenuAsPrimaryAction = true
+        button.clipsToBounds = true
+        return button
     }()
     
     weak var delegate: ProfileImageViewDelegate?
+
+    var users: [User] = []
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,9 +37,8 @@ class ProfileImageView: UIView {
     }
     
     private func setupView() {
-        addSubview(profileImageView)
+        addSubview(button)
         setupConstraints()
-        setupGesture()
     }
     
     private func setupConstraints() {
@@ -45,19 +47,37 @@ class ProfileImageView: UIView {
             make.size.equalTo(30) // Ensure the entire view is 30x30
         }
         
-        profileImageView.snp.makeConstraints { make in
+        button.snp.makeConstraints { make in
             make.edges.equalToSuperview() // Fill the entire view
         }
         
     }
     
-    private func setupGesture() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(profileTapped))
-        addGestureRecognizer(tapGesture)
+    func configureMenu(_ users: [User]){
+        
+        let menu = UIMenu(title: "Switch Profile", options: .displayInline, children:
+            getUserMenuActions(users)
+        )
+        
+        button.isHidden = false
+        button.setImage(UIImage(named: "user1"), for: .normal)
+        button.menu = menu
+        button.imageView?.contentMode = .scaleAspectFill
+        
     }
     
-    @objc private func profileTapped() {
-        delegate?.profileImageViewDidTap()
+    private func getUserMenuActions(_ users: [User]) -> [UIAction] {
+        var actions: [UIAction] = []
+        
+        users.forEach { user in
+            let profileImage = UIImage(named: user.profileImageURL ?? "")
+            actions.append(UIAction(title: user.name ?? "", image: profileImage) { [weak self] _ in
+                guard let self else { return }
+                self.delegate?.didTapSwitchUser(user)
+            })
+        }
+        
+        return actions
     }
     
 }

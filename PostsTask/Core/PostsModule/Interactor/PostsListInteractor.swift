@@ -11,6 +11,7 @@ protocol PostsListInteractorProtocol {
     
     var presenter: PostsListPresenterProtocol? { get set }
     func getPosts()
+    func getUsers()
     
 }
 
@@ -30,6 +31,20 @@ class PostsListInteractor: PostsListInteractorProtocol {
             switch result {
             case .success(let posts):
                 self.presenter?.interactorDidFetchPosts(with: .success(posts))
+            case .failure(let failure):
+                break
+            }
+        }
+        
+    }
+    
+    func getUsers() {
+        
+        repository.fetchUsers { [weak self] result in
+            guard let self else {return}
+            switch result {
+            case .success(let users):
+                self.presenter?.interactorDidFetchUsers(with: .success(users))
             case .failure(let failure):
                 break
             }

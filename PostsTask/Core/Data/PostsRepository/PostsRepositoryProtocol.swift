@@ -10,5 +10,6 @@ import Foundation
 protocol PostsRepositoryProtocol {
     
     func fetchPosts(completion: @escaping (Result<[Post], Error>)->())
+    func fetchUsers(completion: @escaping (Result<[User], Error>)->())
     
 }

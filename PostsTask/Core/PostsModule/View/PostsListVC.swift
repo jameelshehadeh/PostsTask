@@ -26,6 +26,12 @@ class PostsListVC: UIViewController {
         return activityIndicator
     }()
     
+    private lazy var profileImageView: ProfileImageView = {
+        let profileImageView = ProfileImageView()
+        profileImageView.delegate = self
+        return profileImageView
+    }()
+    
     private lazy var barButtonItem: UIBarButtonItem = {
         let barButtonItem: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(pushCreatePost))
         barButtonItem.tintColor = .label
@@ -56,8 +62,6 @@ class PostsListVC: UIViewController {
     }
     
     private func setupProfileImageView() {
-        let profileImageView = ProfileImageView()
-        profileImageView.delegate = self
         let profileButtonItem = UIBarButtonItem(customView: profileImageView)
         navigationItem.leftBarButtonItem = profileButtonItem
     }
@@ -113,12 +117,16 @@ extension PostsListVC: PostsListViewProtocol {
         }
     }
     
+    func didFetchUsers(_ users: [User]) {
+        profileImageView.configureMenu(users)
+    }
+    
 }
 
 extension PostsListVC: ProfileImageViewDelegate {
     
-    func profileImageViewDidTap() {
-        
+    func didTapSwitchUser(_ switchedUser: User) {
+        print("switched to user: \(switchedUser)")
     }
     
 }
