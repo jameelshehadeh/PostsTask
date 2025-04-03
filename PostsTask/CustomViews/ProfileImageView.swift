@@ -71,7 +71,7 @@ class ProfileImageView: UIView {
         
         users.forEach { user in
             let profileImage = UIImage(named: user.profileImageURL ?? "")
-            actions.append(UIAction(title: user.name ?? "", image: profileImage) { [weak self] _ in
+            actions.append(UIAction(title: user.name ?? "", image: profileImage?.circularImage()) { [weak self] _ in
                 guard let self else { return }
                 self.delegate?.didTapSwitchUser(user)
             })
