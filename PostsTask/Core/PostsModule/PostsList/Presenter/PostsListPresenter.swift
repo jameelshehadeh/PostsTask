@@ -60,8 +60,10 @@ class PostsListPresenter: PostsListPresenterProtocol {
             break
         }
         
-        
-        
+    }
+    
+    func switchUser(to user: User) {
+        interactor?.switchToUser(user)
     }
     
     func getDataByIndex(_ index: Int) -> Post? {

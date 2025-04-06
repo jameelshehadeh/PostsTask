@@ -9,8 +9,6 @@ import Foundation
 
 class PostsRepository: PostsRepositoryProtocol {
    
-    
-    
     private let networkService: Networkable
     
     init(networkService: Networkable = NetworkService()) {

@@ -21,5 +21,6 @@ protocol PostsListPresenterProtocol {
     var router: PostsRouting? { get set }
     func pushCreatePost()
     func updateLoadingState(with loadingState: LoadingState)
+    func switchUser(to user: User)
     
 }

@@ -12,6 +12,7 @@ protocol PostsListInteractorProtocol {
     var presenter: PostsListPresenterProtocol? { get set }
     func getPosts()
     func getUsers()
+    func switchToUser(_ user: User)
     
 }
 
@@ -49,6 +50,10 @@ class PostsListInteractor: PostsListInteractorProtocol {
                 break
             }
         }
+        
+    }
+    
+    func switchToUser(_ user: User) {
         
     }
     
