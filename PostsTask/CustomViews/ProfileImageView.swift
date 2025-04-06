@@ -55,14 +55,19 @@ class ProfileImageView: UIView {
     
     func configureMenu(_ users: [User]){
         
-        self.users = users
+        guard !users.isEmpty else {return}
         
+        self.users = users
         let menu = UIMenu(title: "Switch Profile", options: .displayInline, children:
             getUserMenuActions()
         )
         
         guard let defaultUser = users.first else {return}
-        // Switching to first user as a default user
+        /* Switching to first user as a default user, for the sake of simplicity
+         In real scenario we would have an authentication module,
+         where the auth and switching logic is performed.
+         */
+        UserDefaults.standard.setCodableValue(defaultUser, forKey: "currentUser")
         switchUser(defaultUser)
         button.menu = menu
     }

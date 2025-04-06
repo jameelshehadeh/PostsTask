@@ -54,6 +54,7 @@ class PostsListInteractor: PostsListInteractorProtocol {
     }
     
     func switchToUser(_ user: User) {
+        UserDefaults.standard.setCodableValue(user, forKey: "currentUser")
         presenter?.interactorDidSwitchUser(to: user)
     }
     
