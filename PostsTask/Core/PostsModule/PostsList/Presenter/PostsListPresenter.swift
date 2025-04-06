@@ -8,7 +8,7 @@
 import Foundation
 
 class PostsListPresenter: PostsListPresenterProtocol {
-    
+        
     var router: (any PostsRouting)?
     
     var loadingState: LoadingState = .loading
@@ -64,6 +64,10 @@ class PostsListPresenter: PostsListPresenterProtocol {
     
     func switchUser(to user: User) {
         interactor?.switchToUser(user)
+    }
+    
+    func interactorDidSwitchUser(to user: User) {
+        view?.switchToUser(user)
     }
     
     func getDataByIndex(_ index: Int) -> Post? {

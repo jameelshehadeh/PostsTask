@@ -55,18 +55,25 @@ class ProfileImageView: UIView {
     
     func configureMenu(_ users: [User]){
         
+        self.users = users
+        
         let menu = UIMenu(title: "Switch Profile", options: .displayInline, children:
-            getUserMenuActions(users)
+            getUserMenuActions()
         )
         
-        button.isHidden = false
-        button.setImage(UIImage(named: "user1"), for: .normal)
+        guard let defaultUser = users.first else {return}
+        // Switching to first user as a default user
+        switchUser(defaultUser)
         button.menu = menu
+    }
+       
+    func switchUser(_ user: User) {
+        button.isHidden = false
+        button.setImage(UIImage(named: user.profileImageURL ?? ""), for: .normal)
         button.imageView?.contentMode = .scaleAspectFill
-        
     }
     
-    private func getUserMenuActions(_ users: [User]) -> [UIAction] {
+    private func getUserMenuActions() -> [UIAction] {
         var actions: [UIAction] = []
         
         users.forEach { user in

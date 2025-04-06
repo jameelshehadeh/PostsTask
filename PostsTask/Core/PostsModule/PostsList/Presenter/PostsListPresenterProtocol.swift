@@ -22,5 +22,6 @@ protocol PostsListPresenterProtocol {
     func pushCreatePost()
     func updateLoadingState(with loadingState: LoadingState)
     func switchUser(to user: User)
+    func interactorDidSwitchUser(to user:User)
     
 }

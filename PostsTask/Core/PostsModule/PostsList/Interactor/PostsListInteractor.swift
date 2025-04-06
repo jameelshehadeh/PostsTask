@@ -54,7 +54,7 @@ class PostsListInteractor: PostsListInteractorProtocol {
     }
     
     func switchToUser(_ user: User) {
-        
+        presenter?.interactorDidSwitchUser(to: user)
     }
     
 }

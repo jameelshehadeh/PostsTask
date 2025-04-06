@@ -121,12 +121,16 @@ extension PostsListVC: PostsListViewProtocol {
         profileImageView.configureMenu(users)
     }
     
+    func switchToUser(_ user: User) {
+        profileImageView.switchUser(user)
+    }
+    
 }
 
 extension PostsListVC: ProfileImageViewDelegate {
     
     func didTapSwitchUser(_ switchedUser: User) {
-        print("switched to user: \(switchedUser)")
+        presenter?.switchUser(to: switchedUser)
     }
     
 }
