@@ -44,9 +44,11 @@ class PostsRouter: PostsRouting {
     }
     
     func pushCreatePost(){
-        let vc = UIViewController(nibName: nil, bundle: nil)
-        vc.view.backgroundColor = .red
-        view?.navigationController?.pushViewController(vc, animated: true)
+        let createPostRouter: CreatePostRouting = CreatePostRouter.start()
+        guard let createPostVC = createPostRouter.view else {
+            fatalError("EntryPoint view is nil. Ensure the router is properly initialized.")
+        }
+        view?.navigationController?.pushViewController(createPostVC, animated: true)
     }
     
 }
