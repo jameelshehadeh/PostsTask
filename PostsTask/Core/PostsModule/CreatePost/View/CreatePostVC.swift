@@ -116,8 +116,9 @@ class CreatePostVC: UIViewController, CreatePostViewProtocol {
     }
 
     @objc private func submitTapped() {
-        let text = postTextView.text ?? ""
-        let image = selectedImageView.image
+        let postText = postTextView.text ?? ""
+        let postImage = selectedImageView.image
+        presenter?.createPost(postText, postImage)
     }
     
 }

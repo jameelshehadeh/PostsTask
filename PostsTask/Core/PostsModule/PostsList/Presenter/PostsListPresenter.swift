@@ -28,6 +28,11 @@ class PostsListPresenter: PostsListPresenterProtocol {
         updateLoadingState(with: .loading)
         interactor?.getPosts()
         interactor?.getUsers()
+        addObservers()
+    }
+    
+    deinit {
+        removeObservers()
     }
     
     func interactorDidFetchPosts(with result: Result<[Post],Error>) {
@@ -86,4 +91,19 @@ class PostsListPresenter: PostsListPresenterProtocol {
     func pushCreatePost() {
         router?.pushCreatePost()
     }
+    
+    private func addObservers(){
+        NotificationCenter.default.addObserver(self, selector: #selector(updatePost), name: .newPostCreated, object: nil)
+    }
+    
+    private func removeObservers(){
+        NotificationCenter.default.removeObserver(self, name: .newPostCreated, object: nil)
+    }
+    
+    @objc private func updatePost(_ notification: NSNotification) {
+        guard let newPost = notification.userInfo?["post"] as? Post else {return}
+        posts?.insert(newPost, at: 0)
+        view?.reloadData()
+    }
+    
 }
