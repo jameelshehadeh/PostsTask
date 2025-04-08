@@ -41,6 +41,7 @@ class PostsListVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Posts"
+        view.backgroundColor = .systemBackground
         addSubviews()
         presenter?.viewDidLoad()
         navigationItem.rightBarButtonItem = barButtonItem
