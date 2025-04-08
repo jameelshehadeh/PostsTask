@@ -17,5 +17,6 @@ class CreatePostPresenter: CreatePostPresenterProtocol {
 
     func createPost(_ postText: String?, _ postImage: UIImage?) {
         interactor?.createPost(postText, postImage)
+        router?.popView()
     }
 }

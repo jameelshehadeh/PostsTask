@@ -12,6 +12,7 @@ typealias CreatePostEntryPoint = CreatePostViewProtocol & UIViewController
 protocol CreatePostRouting {
     var view: CreatePostEntryPoint? { get set }
     static func start() -> CreatePostRouting
+    func popView()
 }
 
 final class CreatePostRouter: CreatePostRouting {
@@ -30,6 +31,10 @@ final class CreatePostRouter: CreatePostRouting {
         presenter.router = router
         router.view = view as? CreatePostEntryPoint
         return router
+    }
+    
+    func popView() {
+        view?.navigationController?.popViewController(animated: true)
     }
     
 }
