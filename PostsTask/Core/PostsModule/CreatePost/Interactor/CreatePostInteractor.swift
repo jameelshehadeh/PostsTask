@@ -48,7 +48,7 @@ class CreatePostInteractor: CreatePostInteractorProtocol {
         guard let user = UserDefaults.standard.getCodableValue(dataType: User.self, key: "currentUser") else {
             return
         }
-        let post = Post(id: UUID().uuidString, owner: user, text: text, postImageURL: imageUrl?.absoluteString, createdAt: "")
+        let post = Post(id: UUID().uuidString, owner: user, text: text, postImageURL: imageUrl?.absoluteString)
         NotificationCenter.default.post(name: .newPostCreated, object: nil,userInfo: ["post":post])
     }
     

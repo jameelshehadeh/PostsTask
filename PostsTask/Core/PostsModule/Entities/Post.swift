@@ -13,6 +13,5 @@ struct Post: Identifiable, Codable {
     var owner: User?
     var text: String?
     var postImageURL: String?
-    var createdAt: String?
     
 }
