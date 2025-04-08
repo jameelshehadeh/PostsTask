@@ -21,7 +21,7 @@ class CreatePostVC: UIViewController, CreatePostViewProtocol {
         return textView
     }()
     
-    private lazy var selectedImageView: UIImageView = {
+    private(set) lazy var selectedImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 8
@@ -123,21 +123,3 @@ class CreatePostVC: UIViewController, CreatePostViewProtocol {
     }
     
 }
-
-extension CreatePostVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[.originalImage] as? UIImage {
-            selectedImageView.image = image
-            selectedImageView.isHidden = false
-        }
-        dismiss(animated: true)
-    }
-
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true)
-    }
-    
-}
-
-
