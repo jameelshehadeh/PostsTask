@@ -53,6 +53,7 @@ class CreatePostVC: UIViewController, CreatePostViewProtocol {
         title = "Create post"
         view.backgroundColor = .systemBackground
         view.tintColor = .label
+        setNavBarAppearance(.label)
         addSubviews()
         addConstraints()
         setupActions()
