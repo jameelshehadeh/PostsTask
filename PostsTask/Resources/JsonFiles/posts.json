@@ -20,7 +20,7 @@
       "profileImageURL": "user2"
     },
     "text": "Had a great workout session this is a long text to test how a post will react in case of long test, let's keep writing to see what's gonna happen",
-    "postImageURL": "https://picsum.photos/200",
+    "postImageURL": "https://picsum.photos/300",
     "createdAt": "2025-04-01T13:15:00Z"
   },
   {
@@ -32,7 +32,7 @@
       "profileImageURL": "user1"
     },
     "text": "Exploring new tech trends!",
-    "postImageURL": "https://picsum.photos/200",
+    "postImageURL": "https://picsum.photos/400",
     "createdAt": "2025-04-01T14:30:00Z"
   }
 ]

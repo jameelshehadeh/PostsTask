@@ -55,6 +55,7 @@ class PostTableViewCell: UITableViewCell {
     private lazy var postImageView : UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 10
+        imageView.isHidden = true
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -112,13 +113,24 @@ class PostTableViewCell: UITableViewCell {
         postOwnerImageView.image = UIImage(named: post.owner?.profileImageURL ?? "")
         postTextLabel.text = post.text
         ownerUsernameLabel.text = "@\(post.owner?.username ?? "")"
-        
-        if let imageURLString = post.postImageURL,
+        configureImageView(with: post.postImageURL)
+    }
+    
+    private func configureImageView(with urlString: String?) {
+        if let imageURLString = urlString,
            let url = URL(string: imageURLString){
-
             postImageView.sd_setImage(with: url)
+            postImageView.isHidden = false
         }
-       
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        postImageView.image = nil
+        ownerNameLabel.text = ""
+        ownerUsernameLabel.text = ""
+        postTextLabel.text = ""
+        postImageView.isHidden = true
     }
     
 }
