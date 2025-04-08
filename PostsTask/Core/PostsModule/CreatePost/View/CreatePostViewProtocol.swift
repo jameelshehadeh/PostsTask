@@ -10,5 +10,5 @@ import Foundation
 protocol CreatePostViewProtocol {
     
     var presenter: CreatePostPresenterProtocol? { set get }
-    
+    func showValidationError(_ errorMsg: String)
 }

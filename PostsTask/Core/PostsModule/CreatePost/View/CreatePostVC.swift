@@ -21,6 +21,14 @@ class CreatePostVC: UIViewController, CreatePostViewProtocol {
         return textView
     }()
     
+    private lazy var errorLabel : UILabel = {
+        let label = UILabel()
+        label.textColor = .red
+        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.isHidden = true
+        return label
+    }()
+    
     private(set) lazy var selectedImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -62,6 +70,7 @@ class CreatePostVC: UIViewController, CreatePostViewProtocol {
 
     private func addSubviews() {
         view.addSubview(postTextView)
+        view.addSubview(errorLabel)
         view.addSubview(selectedImageView)
         view.addSubview(pickImageButton)
         view.addSubview(submitButton)
@@ -74,9 +83,15 @@ class CreatePostVC: UIViewController, CreatePostViewProtocol {
             make.left.right.equalToSuperview().inset(16)
             make.height.equalTo(120)
         }
+        
+        errorLabel.snp.makeConstraints { make in
+            make.height.equalTo(20)
+            make.left.right.equalToSuperview().inset(16)
+            make.top.equalTo(postTextView.snp.bottom).offset(10)
+        }
 
         selectedImageView.snp.makeConstraints { make in
-            make.top.equalTo(postTextView.snp.bottom).offset(16)
+            make.top.equalTo(errorLabel.snp.bottom).offset(16)
             make.left.right.equalToSuperview().inset(16)
             make.height.equalTo(200)
         }
@@ -85,7 +100,7 @@ class CreatePostVC: UIViewController, CreatePostViewProtocol {
             make.top.equalTo(selectedImageView.snp.bottom).offset(12)
             make.centerX.equalToSuperview()
         }
-
+        
         submitButton.snp.makeConstraints { make in
             make.top.equalTo(pickImageButton.snp.bottom).offset(20)
             make.left.right.equalToSuperview().inset(16)
@@ -120,6 +135,11 @@ class CreatePostVC: UIViewController, CreatePostViewProtocol {
         let postText = postTextView.text ?? ""
         let postImage = selectedImageView.image
         presenter?.createPost(postText, postImage)
+    }
+    
+    func showValidationError(_ errorMsg: String) {
+        errorLabel.text = errorMsg
+        errorLabel.isHidden = false
     }
     
 }
