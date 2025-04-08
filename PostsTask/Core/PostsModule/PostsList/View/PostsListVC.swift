@@ -12,7 +12,7 @@ class PostsListVC: UIViewController {
     
     var presenter: (any PostsListPresenterProtocol)?
     
-    private lazy var tableView : UITableView = {
+    private(set) lazy var tableView : UITableView = {
         let tv: UITableView = UITableView(frame: .zero, style: .plain)
         tv.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.id)
         tv.delegate = self
@@ -20,13 +20,13 @@ class PostsListVC: UIViewController {
         return tv
     }()
 
-    private lazy var activityIndicator: UIActivityIndicatorView = {
+    private(set) lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView(style: .large)
         activityIndicator.hidesWhenStopped = true
         return activityIndicator
     }()
     
-    private lazy var profileImageView: ProfileImageView = {
+    private(set) lazy var profileImageView: ProfileImageView = {
         let profileImageView = ProfileImageView()
         profileImageView.delegate = self
         return profileImageView
@@ -77,54 +77,6 @@ class PostsListVC: UIViewController {
         }
     }
 
-}
-
-extension PostsListVC: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter?.getItemCount ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.id, for: indexPath) as? PostTableViewCell , let model = presenter?.getDataByIndex(indexPath.row) else {
-            return UITableViewCell()
-        }
-        cell.configureUI(with: model)
-        return cell
-    }
-        
-}
-
-extension PostsListVC: PostsListViewProtocol {
-    
-    func reloadData() {
-        self.tableView.reloadData()
-    }
-    
-    func update(with error: any Error) {
-        
-    }
-    
-    func updateLoadingState() {
-        guard let loadingState = presenter?.loadingState else { return }
-        switch loadingState {
-        case .loading:
-            tableView.isHidden = true
-            activityIndicator.startAnimating()
-        case .idle:
-            tableView.isHidden = false
-            activityIndicator.stopAnimating()
-        }
-    }
-    
-    func didFetchUsers(_ users: [User]) {
-        profileImageView.configureMenu(users)
-    }
-    
-    func switchToUser(_ user: User) {
-        profileImageView.switchUser(user)
-    }
-    
 }
 
 extension PostsListVC: ProfileImageViewDelegate {
