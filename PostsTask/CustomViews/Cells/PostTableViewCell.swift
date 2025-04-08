@@ -83,7 +83,7 @@ class PostTableViewCell: UITableViewCell {
         
     }
     
-    func addSubviews() {
+    private func addSubviews() {
         postHeaderHStackView.addArrangedSubview(postOwnerImageView)
         postHeaderHStackView.addArrangedSubview(ownerNameLabel)
         postHeaderHStackView.addArrangedSubview(ownerUsernameLabel)
@@ -94,7 +94,7 @@ class PostTableViewCell: UITableViewCell {
         contentView.addSubview(vStackView)
     }
 
-    func addConstraints() {
+    private func addConstraints() {
         vStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(10)
         }
@@ -133,23 +133,4 @@ class PostTableViewCell: UITableViewCell {
         postImageView.isHidden = true
     }
     
-}
-
-struct PostTableViewCellPreview: UIViewRepresentable {
-    
-    func makeUIView(context: Context) -> UITableViewCell {
-        return PostTableViewCell()
-    }
-    
-    func updateUIView(_ uiView: UITableViewCell, context: Context) {
-        // You can customize the cell here, e.g., setting labels or images
-    }
-}
-
-struct PostTableViewCell_Preview: PreviewProvider {
-    static var previews: some View {
-        PostTableViewCellPreview()
-            .previewLayout(.sizeThatFits)
-            .padding()
-    }
 }
