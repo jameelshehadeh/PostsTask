@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftUI
+import SDWebImage
 
 class PostTableViewCell: UITableViewCell {
 
@@ -14,7 +15,8 @@ class PostTableViewCell: UITableViewCell {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .fill
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fill
+        stackView.spacing = 10
         return stackView
     }()
     
@@ -52,7 +54,8 @@ class PostTableViewCell: UITableViewCell {
     
     private lazy var postImageView : UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.layer.cornerRadius = 10
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -86,6 +89,7 @@ class PostTableViewCell: UITableViewCell {
         postHeaderHStackView.addArrangedSubview(UIView())
         vStackView.addArrangedSubview(postHeaderHStackView)
         vStackView.addArrangedSubview(postTextLabel)
+        vStackView.addArrangedSubview(postImageView)
         contentView.addSubview(vStackView)
     }
 
@@ -96,6 +100,11 @@ class PostTableViewCell: UITableViewCell {
         postOwnerImageView.snp.makeConstraints { make in
             make.size.equalTo(40)
         }
+    
+        postImageView.snp.makeConstraints { make in
+            make.width.equalToSuperview()
+            make.height.equalTo(postImageView.snp.width)
+        }
     }
     
     func configureUI(with post: Post) {
@@ -103,6 +112,13 @@ class PostTableViewCell: UITableViewCell {
         postOwnerImageView.image = UIImage(named: post.owner?.profileImageURL ?? "")
         postTextLabel.text = post.text
         ownerUsernameLabel.text = "@\(post.owner?.username ?? "")"
+        
+        if let imageURLString = post.postImageURL,
+           let url = URL(string: imageURLString){
+
+            postImageView.sd_setImage(with: url)
+        }
+       
     }
     
 }

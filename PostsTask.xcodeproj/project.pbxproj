@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FA4F84412D9BD8A000948F6E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = FA4F84402D9BD8A000948F6E /* SnapKit */; };
+		FA4F84ED2DA5BAFE00948F6E /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = FA4F84EC2DA5BAFE00948F6E /* SDWebImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA4F84ED2DA5BAFE00948F6E /* SDWebImage in Frameworks */,
 				FA4F84412D9BD8A000948F6E /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -131,6 +133,7 @@
 			name = PostsTask;
 			packageProductDependencies = (
 				FA4F84402D9BD8A000948F6E /* SnapKit */,
+				FA4F84EC2DA5BAFE00948F6E /* SDWebImage */,
 			);
 			productName = PostsTask;
 			productReference = FA4F82EF2D98023800948F6E /* PostsTask.app */;
@@ -216,6 +219,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				FA4F843F2D9BD8A000948F6E /* XCRemoteSwiftPackageReference "SnapKit" */,
+				FA4F84EB2DA5BAFE00948F6E /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = FA4F82F02D98023800948F6E /* Products */;
@@ -586,6 +590,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		FA4F84EB2DA5BAFE00948F6E /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.21.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -593,6 +605,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FA4F843F2D9BD8A000948F6E /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		FA4F84EC2DA5BAFE00948F6E /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA4F84EB2DA5BAFE00948F6E /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
